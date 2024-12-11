@@ -1,5 +1,13 @@
 async function fetchWeatherData(){
-    const city = document.getElementById('city').ariaValueMax.trim();
+    const city = document.getElementById('city').value.trim();
+    const cityInput = document.getElementById('city');
+    if (cityInput) { 
+        const city = cityInput.value.trim(); 
+  // ... rest of your code
+    } else {
+        console.error("City input element not found."); 
+  // Handle the case where the input element doesn't exist
+    }
     if(!city){
         alert('Please enter a city name.');
         return;
@@ -29,7 +37,7 @@ function displayWeatherData(data){
     const{location,current} = data;
 
     document.getElementById('city-name').textContent=`City: ${location.name}`;
-    document.getElementById('temperature').textContent=`Temperature: ${current.temperature}&deg;C`;
+    document.getElementById('temperature').textContent=`Temperature: ${current.temperature}\u00B0C`;
     document.getElementById('humidity').textContent=`Humidity: ${current.humidity}%`;
     document.getElementById('wind-speed').textContent=`Wind speed: ${current.wind_speed} km/h`;
     
