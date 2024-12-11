@@ -1,0 +1,56 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    background-color: #f0f8ff;
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    color: #333;
+    margin: 20px 0;
+}
+
+.controls{
+    margin: 20px;
+}
+
+.controls label , .controls input ,.controls button {
+    font-size: 16px;
+    margin: 5px;
+}
+
+.controls input{
+    border-radius: 3px;
+    border: 1px solid;
+    padding: 5px;
+}
+
+
+button{
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.weather-info{
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 600px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.weather-info p{
+    font-size: 18px;
+    margin: 5px 0;
+}
