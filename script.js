@@ -60,32 +60,47 @@ function analyzeWeatherData(temperature,humidity,windSpeed){
     document.getElementById('analysis').textContent=analysis;
 }
 
-function renderChart(temperature,humidity,windSpeed){
+function renderChart(temperature, humidity, windSpeed) {
     const ctx = document.getElementById('weatherChart').getContext('2d');
-
-    if(window.weatherChart){
-        window.weatherChart.destroy();
-    }
-
-    window.weatherChart = new CharacterData(ctx,{
+  
+    try {
+      if (window.weatherChart) { 
+        console.log("Destroying existing chart:", window.weatherChart); 
+        
+        if (window.weatherChart instanceof Chart) { 
+            window.weatherChart.destroy(); 
+        }
+        else {
+            console.warn("window.weatherChart is not a Chart.js instance. Skipping destruction.");
+        }
+      }
+  
+      window.weatherChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Temperature(\u00B0C)','Humidity (%)', 'Wind Speed (km/h)'],
-            datasets: [{
-                label: 'Weather Data',
-                data: [temperature,humidity,windSpeed],
-                backgroundColor: ['#FF6384','#36A2EB','#FFCE56'],
-                borderWidth: 1,
-            }]
+          labels: ['Temperature (°C)', 'Humidity (%)', 'Wind Speed (km/h)'],
+          datasets: [{
+            label: 'Weather Data',
+            data: [temperature, humidity, windSpeed],
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+            borderWidth: 1,
+          }]
         },
         options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                }
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
             }
+          }
         }
-
-    })
-}
+      });
+    } catch (error) {
+      console.error("Error creating or destroying chart:", error);
+      // Handle the error gracefully (e.g., display an error message to the user)
+      alert("An error occurred while rendering the chart. Please try again later.");
+      return; 
+    }
+  
+    console.log("window.weatherChart after:", window.weatherChart); 
+  }
