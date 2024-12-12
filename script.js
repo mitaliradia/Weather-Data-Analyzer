@@ -42,6 +42,7 @@ function displayWeatherData(data){
     document.getElementById('wind-speed').textContent=`Wind speed: ${current.wind_speed} km/h`;
     
     analyzeWeatherData(current.temperature,current.humidity,current.wind_speed);
+    renderChart(current.temperature, current.humidity, current.wind_speed);
 }
 
 function analyzeWeatherData(temperature,humidity,windSpeed){
@@ -57,4 +58,34 @@ function analyzeWeatherData(temperature,humidity,windSpeed){
     }
 
     document.getElementById('analysis').textContent=analysis;
+}
+
+function renderChart(temperature,humidity,windSpeed){
+    const ctx = document.getElementById('weatherChart').getContext('2d');
+
+    if(window.weatherChart){
+        window.weatherChart.destroy();
+    }
+
+    window.weatherChart = new CharacterData(ctx,{
+        type: 'bar',
+        data: {
+            labels: ['Temperature(\u00B0C)','Humidity (%)', 'Wind Speed (km/h)'],
+            datasets: [{
+                label: 'Weather Data',
+                data: [temperature,humidity,windSpeed],
+                backgroundColor: ['#FF6384','#36A2EB','#FFCE56'],
+                borderWidth: 1,
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                }
+            }
+        }
+
+    })
 }
